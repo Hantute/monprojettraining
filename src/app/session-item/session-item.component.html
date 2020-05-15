@@ -1,0 +1,31 @@
+<!--<h2>{{name}}</h2>-->
+<!--<h2 [textContent]="name"></h2> cette manière fonctionne aussi, mais par simplification, on utilise la première ligne 1-->
+
+<h2>{{session.name}}</h2> <!-- On appelle l'objet session puis on affiche chacun des différents composant de l'objet-->
+<div [align]="alignement" [ngStyle]="{color:couleur}">{{session.track}}</div>
+
+<div>Prévue le {{session.date | date:'d MMM y'}} pendant {{session.duree}} jours à {{session.local}}</div>
+
+<!-- On met en place une condition qui offre 2 possibilité envoyant 2 réponses différentes -->
+<li *ngIf="session.participants <20;then ok else notok"></li>
+
+<!-- On définit le résultat à afficher en fonction des réponses obtenus dans la condition plus haut ici, c'est #ok ou #notok-->
+<ng-template #ok>Encore {{20 - session.participants}} places sont disponibles!</ng-template>
+<ng-template #notok>Session complète! </ng-template>
+
+<div>{{session.participants}} Participants</div>
+
+<!-- <div [align]="alignement" [ngStyle]="{color:couleur}">MEAN Stack</div> -->
+<!-- <div>Prévue du 11/06/2018 au 15/06/2018</div>
+<div>Lyon</div> -->
+<div class="tools">
+  <a class="delete">
+    Details
+  </a>
+  <a [appInscriptiondisabled]="session.isCompleted" (click)="inscrire()" class="inscrire">
+    Inscription
+  </a>
+  <a class="partager">
+    Partager
+  </a>
+</div>
